@@ -1,0 +1,205 @@
+.caption {
+  margin: 0 auto 22px;
+  text-align: center;
+  color: rgba(247, 243, 234, 0.92);
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  font-style: italic;
+  max-width: 56ch;
+}
+
+.captionAccent {
+  color: rgba(232, 197, 71, 0.92);
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+}
+
+.rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* The outer ring dashes flow around like energy */
+.outerRing {
+  transform-origin: 50px 50px;
+  animation: dashFlow 12s linear infinite;
+}
+
+@keyframes dashFlow {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -100; }
+}
+
+.centerGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(232,197,71,0.18) 0%, rgba(232,197,71,0.04) 45%, rgba(232,197,71,0) 70%);
+  pointer-events: none;
+  animation: glowPulse 5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
+}
+
+/* Ripple rings emanating from center */
+.ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22%;
+  aspect-ratio: 1 / 1;
+  border-radius: 999px;
+  border: 1px solid rgba(232, 197, 71, 0.45);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  animation: ripple 4.5s ease-out infinite;
+}
+
+.ripple1 { animation-delay: 0s;   }
+.ripple2 { animation-delay: 1.5s; }
+.ripple3 { animation-delay: 3s;   }
+
+@keyframes ripple {
+  0%   { transform: translate(-50%, -50%) scale(0.5); opacity: 0;   border-color: rgba(232,197,71,0.6); }
+  15%  { opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(2.6); opacity: 0;   border-color: rgba(232,197,71,0.0); }
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22%;
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.centerBreath {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: breathe 4.5s ease-in-out infinite;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1);    }
+  50%      { transform: scale(1.06); }
+}
+
+/* Uniform chips */
+.chip {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 130px;
+  padding: 14px 12px;
+  background: rgba(247, 243, 234, 0.07);
+  border: 1px solid rgba(247, 243, 234, 0.22);
+  border-radius: 14px;
+  color: var(--color-cream);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 8px 24px -16px rgba(0, 0, 0, 0.5);
+  z-index: 3;
+}
+
+.chipTop    { top: 0;    left: 50%; transform: translate(-50%, -12%); }
+.chipRight  { top: 50%;  right: 0;  transform: translate(12%, -50%); }
+.chipBottom { bottom: 0; left: 50%; transform: translate(-50%, 12%); }
+.chipLeft   { top: 50%;  left: 0;   transform: translate(-12%, -50%); }
+
+.chipIcon {
+  color: var(--color-mustard);
+  width: 22px;
+  height: 22px;
+}
+
+/* Traveling signal dots — fire inward from chips toward the assistant */
+.signalDot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--color-mustard);
+  box-shadow: 0 0 14px rgba(232, 197, 71, 0.9);
+  pointer-events: none;
+}
+
+.signalDotTop {
+  left: 50%;
+  animation: travelTop 2.6s ease-in infinite;
+  animation-delay: 0s;
+}
+.signalDotRight {
+  top: 50%;
+  animation: travelRight 2.6s ease-in infinite;
+  animation-delay: 0.65s;
+}
+.signalDotBottom {
+  left: 50%;
+  animation: travelBottom 2.6s ease-in infinite;
+  animation-delay: 1.3s;
+}
+.signalDotLeft {
+  top: 50%;
+  animation: travelLeft 2.6s ease-in infinite;
+  animation-delay: 1.95s;
+}
+
+@keyframes travelTop {
+  0%   { top: 18%; transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+  12%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { top: 50%; transform: translate(-50%, -50%) scale(0.6); opacity: 0; }
+}
+@keyframes travelRight {
+  0%   { left: 82%; transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+  12%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { left: 50%; transform: translate(-50%, -50%) scale(0.6); opacity: 0; }
+}
+@keyframes travelBottom {
+  0%   { top: 82%; transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+  12%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { top: 50%; transform: translate(-50%, -50%) scale(0.6); opacity: 0; }
+}
+@keyframes travelLeft {
+  0%   { left: 18%; transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+  12%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { left: 50%; transform: translate(-50%, -50%) scale(0.6); opacity: 0; }
+}
+
+@media (max-width: 520px) {
+  .chip { width: 100px; padding: 10px 8px; font-size: 12px; gap: 6px; }
+  .chipIcon { width: 18px; height: 18px; }
+  .caption { font-size: 18px; }
+}
